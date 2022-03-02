@@ -1,0 +1,58 @@
+- hosts: fortigate
+  connection: httpapi
+  collections:
+  - fortinet.fortios
+  vars:
+   vdom: "root"
+   ansible_httpapi_use_ssl: yes
+   ansible_httpapi_validate_certs: no
+   ansible_httpapi_port: 11443
+
+  tasks:
+  - name: Upgrade 60E Firmware to 6.4.2
+    fortios_monitor:
+      vdom: "root"
+      selector: 'upgrade.system.firmware'
+      params:
+        source: "upload"
+        filename: "FGT_60E-v6-build1723-FORTINET.out"
+        file_content: "{{ lookup( 'file', './firmware/FGT_60E-v6-build1723-FORTINET.out') | string | b64encode }}"
+
+  - name: Pause For Upgrade
+    pause:
+      minutes: 10
+
+  - name: Upgrade 60E Firmware to 6.4.4
+    fortios_monitor:
+      vdom: "root"
+      selector: 'upgrade.system.firmware'
+      params:
+        source: "upload"
+        filename: "FGT_60E-v6-build1803-FORTINET.out"
+        file_content: "{{ lookup( 'file', './firmware/FGT_60E-v6-build1803-FORTINET.out') | string | b64encode }}"
+
+  - name: Pause For Upgrade
+    pause:
+      minutes: 10
+
+  - name: Upgrade 60E Firmware to 6.4.6
+    fortios_monitor:
+      vdom: "root"
+      selector: 'upgrade.system.firmware'
+      params:
+        source: "upload"
+        filename: "FGT_60E-v6-build1879-FORTINET.out"
+        file_content: "{{ lookup( 'file', './firmware/FGT_60E-v6-build1879-FORTINET.out') | string | b64encode }}"
+
+  - name: Pause For Upgrade
+    pause:
+      minutes: 10
+
+  - name: Upgrade 60E Firmware to 6.4.8
+    fortios_monitor:
+      vdom: "root"
+      selector: 'upgrade.system.firmware'
+      params:
+        source: "upload"
+        filename: "FGT_60E-v6-build1914-FORTINET.out"
+        file_content: "{{ lookup( 'file', './firmware/FGT_60E-v6-build1914-FORTINET.out') | string | b64encode }}"

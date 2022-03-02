@@ -1,0 +1,31 @@
+---
+- name: Add monitored host to SmokePing
+  hosts: smokeping
+  vars_prompt:
+    - name: Name
+      prompt: Name
+      private: no
+
+    - name: Host
+      prompt: host
+      private: no
+
+  tasks:
+    - name: Update Config
+      blockinfile:
+        path: /etc/smokeping/config.d/Targets
+        marker: |
+
+          #added by ansible configuration
+        block: |
+          ++ {{Name | replace(' ','_') | replace('.','_')}}
+          menu = {{Name}}
+          title = {{Name}}
+          host = {{Host}}
+      become: true
+
+    - name: Restart SmokePing Service
+      service:
+        name: smokeping
+        state: restarted
+      become: yes

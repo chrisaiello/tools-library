@@ -1,0 +1,34 @@
+- hosts: fortigates
+  connection: httpapi
+  collections:
+    - fortinet.fortios
+  vars:
+    vdom: "root"
+    ansible_httpapi_use_ssl: true
+    ansible_httpapi_validate_certs: false
+    ansible_httpapi_port: 11443
+
+  tasks:
+  - name: "Get System Info"
+    fortios_monitor_fact:
+      selector: 'system_status'
+    register: system_status
+
+  - name: "Display system info"
+    debug:
+      msg: Build is {{ system_status.meta.build }}. Version is {{ system_status.meta.version }}. Serial is {{ system_status.meta.serial }}
+
+  # - name: Save the Build
+  #   copy:
+  #     content: '{{ system_status.meta.build }}'
+  #     dest: './build.txt'
+
+  # - name: Save the Version
+  #   copy:
+  #     content: '{{ system_status.meta.version }}'
+  #     dest: './version.txt'
+
+  # - name: Save the Model
+  #   copy:
+  #     content: '{{ system_status.meta.results.model_number }}'
+  #     dest: './model.txt'

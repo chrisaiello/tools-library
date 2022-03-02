@@ -1,0 +1,11 @@
+---
+- name: Start Delta ADSync
+  hosts: server01
+
+  tasks:
+    - name: Start Sync Cycle
+      ansible.windows.win_powershell:
+        arguments:
+          - -PolicyType Delta
+        script: |
+          Start-AdSyncSyncCycle
