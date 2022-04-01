@@ -8,4 +8,4 @@ A script to migrate devices from ConnectWise Automate to N-Able RMM. It makes us
 
 ## smart_rename
 
-A script to correct Windows host names based on a user defined regex.
+A script to correct Windows host names based on a user-defined regex.
