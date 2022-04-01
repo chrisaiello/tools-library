@@ -7,13 +7,14 @@ from datetime import datetime
 
 
 api_url_base = "https://auvikapi.my.auvik.com/v1"
+tenant_domain_prefix = ""
 
 user = ''
 apikey = ''
 
 #?limit=10&offset=0
 
-tenants_api_url = api_url_base + "/tenants/detail?tenantDomainPrefix=bluebird&filter[availableTenants]=true"
+tenants_api_url = api_url_base + "/tenants/detail?tenantDomainPrefix=" + tenant_domain_prefix + "&filter[availableTenants]=true"
 
 f = csv.writer(open("auvik_bw.csv", 'w', newline=''))
 row = ["Client", "TimeStamp", "Mbps"]
